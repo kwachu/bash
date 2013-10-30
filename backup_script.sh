@@ -1,6 +1,9 @@
 #!/bin/bash
 
+# miejsce docelowe backupu
+dest='/tmp/BU/backup'
 
+# potrzebuje pliku: lista.txt z lista plikow/katalogow do backupowanie
 function backupFiles() {
 	echo "lista plików do backupu [OK]"
 	lista=`cat lista.txt`
@@ -15,6 +18,7 @@ function backupFiles() {
 	fi
 }
 
+# potrzebuje pliku: db.txt z lista baz do backupowanie
 function backupDB() {
 	echo "lista baz do backupu [OK]"
 	for db in `cat db.txt |grep -v "###"`; do	
@@ -29,6 +33,8 @@ function backupDB() {
 		mysqldump -u $dblogin -p$dbpass -h $dbhost $dbname >> ${dbname}.sql && echo "DB: $dbname [OK]"
 	done
 }
+
+
 
 
 
